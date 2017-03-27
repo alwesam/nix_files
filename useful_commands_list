@@ -1,0 +1,37 @@
+#use sed for in place to find and replace
+sed -i -e 's/foo/bar/g' filename
+
+##git status, grep conflicted files and open all at once using vim
+gs | grep both | sed 's/both\s\w\+:\s\+//' | xargs gvim -p
+
+#find all empty files in current directory
+find . -empty
+
+#execute command on file found by find
+find . -iname "filename" -exec md5sum {} \;
+#alternatively
+find . -iname "filename" | xargs md5sum
+
+#excule directory from grep
+grep "something" --exclude-dir=somedir -r
+
+#grep lines that excludes lines starting with #
+
+grep -v "^\s*#" filename
+
+#grep pattern while ignoring lines starting with # (a bit slow)
+
+grep -v "^\s*#" -r --exclude-dir=log --exclude=*.swp | grep this_month_txns
+
+#For some reason the opposite is not working well
+
+grep pattern -r --exclude-dir=log --exclude=*.swp | grep -v "^\s*#"
+
+#print file content in reverse order
+sed -n '1!G;h;$p' file.txt
+
+#Resources
+#http://www.thegeekstuff.com/2010/11/50-linux-commands/?utm_source=feedburner
+#http://www.ucs.cam.ac.uk/docs/leaflets/u5
+
+

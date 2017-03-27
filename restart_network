@@ -1,0 +1,24 @@
+#first sequence
+sudo service network-manager restart
+#or
+sudo /etc/init.d/networking restart
+
+#second sequence---
+sudo rfkill block wifi
+sudo rfkill list
+sudo killall nm-applet
+sudo rfkill unblock wifi
+nohup nm-applet &
+
+#note on nohup and diswon
+#nohup used to run a process in daemon
+#diswon -h <process_id> used to detach it from terminal
+#look into screen
+
+#use dmesg (works)
+dmesg | tail  #look for errors
+sudo modprobe -r iwlwifi
+sudo modprobe iwlwifi
+
+#other useful commands
+lspci | grep Network
